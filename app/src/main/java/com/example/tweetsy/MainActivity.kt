@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         GlobalScope.launch {
-          var response=  tweetsyAPI.getCategory()
+          var response=  tweetsyAPI.getCategories()
             Log.d("HARSH", response.distinct().toString())
             response.distinct()
         }

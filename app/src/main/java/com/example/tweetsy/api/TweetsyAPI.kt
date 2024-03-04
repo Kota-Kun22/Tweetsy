@@ -12,5 +12,5 @@ interface TweetsyAPI {
     suspend fun getTweets(@Header("X-JSON-Path") category:String):Response<List<TweetList>>//it is an async call all the https requests are the
     @GET("/v3/b/65e4c54b266cfc3fde92bc59?meta=false")
     @Headers("X-JSON-Path:tweets..category")//since it is static so here how it is implemented
-    suspend fun getCategory():List<String>
+    suspend fun getCategories():Response<List<String>>
 }

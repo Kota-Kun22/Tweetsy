@@ -1,11 +1,12 @@
 package com.example.tweetsy.repository
-import retrofit2.Response;
 
 import com.example.tweetsy.api.TweetsyAPI
 import com.example.tweetsy.models.TweetList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
+import retrofit2.Response
+
 
 class TweetRepository @Inject constructor(private val tweetsyAPI :TweetsyAPI) {
     private val _categories= MutableStateFlow<  List<String>  >(emptyList())//stateFLow
@@ -16,11 +17,13 @@ class TweetRepository @Inject constructor(private val tweetsyAPI :TweetsyAPI) {
     private val _tweets= MutableStateFlow<List<TweetList>>(emptyList())
     val tweets:StateFlow<List<TweetList>>
         get()=_tweets
+
+
     suspend fun getCategories(){
-        val reponse= tweetsyAPI.getCategory()
-        if(reponse.isNotEmpty())
+        val reponse= tweetsyAPI.getCategories()
+        if(reponse.isSuccessful && reponse.body()!=null)
         {
-            _categories.emit(reponse)
+            _categories.emit(reponse.body()!!)
         }
 
     }
