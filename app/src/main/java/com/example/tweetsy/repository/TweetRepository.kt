@@ -8,19 +8,29 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class TweetRepository @Inject constructor(private val tweetsyAPI :TweetsyAPI) {
-    private val _categories= MutableStateFlow<List<String>>(emptyList())//stateFLow
+    private val _categories= MutableStateFlow<  List<String>  >(emptyList())//stateFLow
     val categories:StateFlow<List<String>>
         get()=_categories
 
 
     private val _tweets= MutableStateFlow<List<TweetList>>(emptyList())
-    val tweets:StateFlow<List<String>>
+    val tweets:StateFlow<List<TweetList>>
         get()=_tweets
     suspend fun getCategories(){
         val reponse= tweetsyAPI.getCategory()
         if(reponse.isNotEmpty())
         {
             _categories.emit(reponse)
+        }
+
+    }
+
+
+    suspend fun getTweets(category:String){
+        val reponse= tweetsyAPI.getTweets(category)
+        if(reponse.isSuccessful && reponse.body()!=null)
+        {
+            _tweets.emit(reponse.body()!!)
         }
 
     }
