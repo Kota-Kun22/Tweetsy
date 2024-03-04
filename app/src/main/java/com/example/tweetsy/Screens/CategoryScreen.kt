@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,21 +39,22 @@ fun CategoryScreen(onClick:(category:String)->Unit) {
             contentAlignment = Alignment.Center){
             Text(text ="LOADING", style = MaterialTheme.typography.headlineSmall)
         }
-    }
-
-
-
-    LazyVerticalGrid(columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(8.dp),
-        verticalArrangement = Arrangement.SpaceAround
-    )
-    {
-        items(categories.value.distinct())
+    }else{
+        LazyVerticalGrid(columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(8.dp),
+            verticalArrangement = Arrangement.SpaceAround
+        )
         {
-            CategoryItem(category = it, onClick =onClick )
+            items(categories.value.distinct())
+            {
+                CategoryItem(category = it, onClick =onClick )
+            }
+
         }
 
     }
+
+
 
     
 
@@ -67,7 +69,12 @@ fun CategoryItem(category:String, onClick:(category:String)->Unit)
 {
     Box(modifier= Modifier
         .padding(4.dp)
-        .clickable { onClick(category) }
+        .clickable { onClick(category) }//add this comment after importing the drawable bg image
+         /**
+          *  .paint(painter = painterResource(id = R.drawable.bg),contentScale = ContentScale.Crop)
+          *
+          *
+          * */
         .size(160.dp)
         .clip(RoundedCornerShape(8.dp))
         .border(1.dp, Color(0xFFEEEEEE)),
