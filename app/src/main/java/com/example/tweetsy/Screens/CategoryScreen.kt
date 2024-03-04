@@ -22,10 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.tweetsy.R
 import com.example.tweetsy.viewmodels.CategoryViewModel
 import dagger.Lazy
 
@@ -69,12 +72,8 @@ fun CategoryItem(category:String, onClick:(category:String)->Unit)
 {
     Box(modifier= Modifier
         .padding(4.dp)
-        .clickable { onClick(category) }//add this comment after importing the drawable bg image
-         /**
-          *  .paint(painter = painterResource(id = R.drawable.bg),contentScale = ContentScale.Crop)
-          *
-          *
-          * */
+        .clickable { onClick(category) }
+        .paint(painter = painterResource(id = R.drawable.circle_scatter_haikei__1_))
         .size(160.dp)
         .clip(RoundedCornerShape(8.dp))
         .border(1.dp, Color(0xFFEEEEEE)),
@@ -85,8 +84,9 @@ fun CategoryItem(category:String, onClick:(category:String)->Unit)
     )
     {
         Text(text = category,
-            fontSize = 19.sp,
-            color = Color.Black,
+            fontSize = 25.sp,
+            fontWeight= FontWeight.Bold,
+            color = Color.White,
             modifier= Modifier.padding(horizontal=0.dp,vertical =20.dp),
             style= MaterialTheme.typography.bodyMedium
         )
