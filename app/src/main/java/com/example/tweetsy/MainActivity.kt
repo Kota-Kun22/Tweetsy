@@ -27,8 +27,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         GlobalScope.launch {
-          val response=  tweetsyAPI.getCategory()
-            Log.d("HARSH", response.toString())
+          var response=  tweetsyAPI.getCategory()
+            Log.d("HARSH", response.distinct().toString())
+            response.distinct()
         }
         setContent {
             TweetsyTheme {
